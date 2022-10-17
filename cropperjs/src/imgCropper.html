@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Img Cropper</title>
+   <link href="css/cropper.css" rel="stylesheet">
+   <link href="css/index.css" rel="stylesheet">
+   <link rel="stylesheet" href="https://unpkg.com/bootstrap@4/dist/css/bootstrap.min.css" crossorigin="anonymous">
+
+</head>
+
+<body>
+   <div class="container">
+      <div class="row">
+         <div class="col-md-9">
+            <div class="docs-demo">
+               <div class="img-container">
+                  <img src="images/syre.jpg" alt="Syre" id="image" crossorigin="anonymous">
+               </div>
+            </div>
+         </div>
+         <div class="col-md-3">
+            <!-- <h3>Preview:</h3> -->
+            <div class="docs-preview clearfix">
+               <div class="img-preview preview-lg"></div>
+               <div class="img-preview preview-md"></div>
+               <div class="img-preview preview-sm"></div>
+               <div class="img-preview preview-xs"></div>
+            </div>
+
+            <!-- <h3>Data:</h3> -->
+            <div class="docs-data">
+               <div class="input-group input-group-sm">
+                  <span class="input-group-prepend">
+                     <label class="input-group-text" for="dataX">X</label>
+                  </span>
+                  <input type="text" class="form-control" id="dataX" placeholder="x">
+                  <span class="input-group-append">
+                     <span class="input-group-text">px</span>
+                  </span>
+               </div>
+               <div class="input-group input-group-sm">
+                  <span class="input-group-prepend">
+                     <label class="input-group-text" for="dataY">Y</label>
+                  </span>
+                  <input type="text" class="form-control" id="dataY" placeholder="y">
+                  <span class="input-group-append">
+                     <span class="input-group-text">px</span>
+                  </span>
+               </div>
+               <div class="input-group input-group-sm">
+                  <span class="input-group-prepend">
+                     <label class="input-group-text" for="dataWidth">Width</label>
+                  </span>
+                  <input type="text" class="form-control" id="dataWidth" placeholder="width">
+                  <span class="input-group-append">
+                     <span class="input-group-text">px</span>
+                  </span>
+               </div>
+               <div class="input-group input-group-sm">
+                  <span class="input-group-prepend">
+                     <label class="input-group-text" for="dataHeight">Height</label>
+                  </span>
+                  <input type="text" class="form-control" id="dataHeight" placeholder="height">
+                  <span class="input-group-append">
+                     <span class="input-group-text">px</span>
+                  </span>
+               </div>
+               <div class="input-group input-group-sm">
+                  <span class="input-group-prepend">
+                     <label class="input-group-text" for="dataRotate">Rotate</label>
+                  </span>
+                  <input type="text" class="form-control" id="dataRotate" placeholder="rotate">
+                  <span class="input-group-append">
+                     <span class="input-group-text">deg</span>
+                  </span>
+               </div>
+               <div class="input-group input-group-sm">
+                  <span class="input-group-prepend">
+                     <label class="input-group-text" for="dataScaleX">ScaleX</label>
+                  </span>
+                  <input type="text" class="form-control" id="dataScaleX" placeholder="scaleX">
+               </div>
+               <div class="input-group input-group-sm">
+                  <span class="input-group-prepend">
+                     <label class="input-group-text" for="dataScaleY">ScaleY</label>
+                  </span>
+                  <input type="text" class="form-control" id="dataScaleY" placeholder="scaleY">
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row" id="actions">
+         <div class="col-md-9 docs-buttons">
+            <div class="btn-group btn-group-crop">
+               <button id="btnGetCrop" type="button" class="btn btn-success" data-method="getCroppedCanvas">
+                  <span class="docs-tooltip" data-toggle="tooltip"
+                     title="cropper.getCroppedCanvas({ maxWidth: 4096, maxHeight: 4096 })">
+                     Get Cropped Canvas
+                  </span>
+               </button>
+               <button type="button" class="btn btn-success" data-method="getCroppedCanvas"
+                  data-option="{ &quot;width&quot;: 160, &quot;height&quot;: 90 }">
+                  <span class="docs-tooltip" data-toggle="tooltip"
+                     title="cropper.getCroppedCanvas({ width: 160, height: 90 })">
+                     160&times;90
+                  </span>
+               </button>
+               <button type="button" class="btn btn-success" data-method="getCroppedCanvas"
+                  data-option="{ &quot;width&quot;: 320, &quot;height&quot;: 180 }">
+                  <span class="docs-tooltip" data-toggle="tooltip"
+                     title="cropper.getCroppedCanvas({ width: 320, height: 180 })">
+                     320&times;180
+                  </span>
+               </button>
+            </div>
+
+            <!-- Show the cropped image in modal -->
+            <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true"
+               aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h5 class="modal-title" id="getCroppedCanvasTitle">Cropped</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                        </button>
+                     </div>
+                     <div class="modal-body"></div>
+                     <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a class="btn btn-primary" id="download" href="javascript:void(0);"
+                           download="cropped.jpg">Download</a>
+                     </div>
+                  </div>
+               </div>
+            </div><!-- /.modal -->
+         </div>
+      </div>
+   </div>
+
+
+   <script src="https://unpkg.com/jquery@3/dist/jquery.slim.min.js" crossorigin="anonymous"></script>
+   <script src="https://unpkg.com/bootstrap@4/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+   <script type="module" src="js/cropper.js"></script>
+   <script type="module" src="js/imgCropper.js"></script>
+</body>
+</html>
